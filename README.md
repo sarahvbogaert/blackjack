@@ -1,2 +1,2 @@
 # blackjack
-Black jack in python
+Simple Black Jack Game in Python
