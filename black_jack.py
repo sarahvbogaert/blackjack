@@ -1,22 +1,5 @@
-from BlackJack.card_game import Deck, Player, Dealer
-
-# functions ------------------------------------------------------------------------
-
-
-def game_on():
-    """
-    Asks user if he wants to continue playing
-    :return: True or False
-    """
-    while True:
-        cont = input(f"Do you want to continue playing? (Y or N): ")
-        if cont not in ['Y', 'N']:
-            print("Wrong input. Please try again.")
-            continue
-        break
-    return cont == "Y"
-
-# classes --------------------------------------------------------------------------
+from card_game import Deck
+from player import Player, Dealer
 
 
 class BlackJack:
@@ -50,8 +33,22 @@ class BlackJack:
                 else:
                     print(f"Player {self.player.name} Looses!")
             print(self.player)
-            if not game_on():  # asks user if he wants to continue playing
+            if not self.game_on():  # asks user if he wants to continue playing
                 break
+
+    @staticmethod
+    def game_on():
+        """
+        Asks user if he wants to continue playing
+        :return: True or False
+        """
+        while True:
+            cont = input(f"Do you want to continue playing? (Y or N): ")
+            if cont not in ['Y', 'N']:
+                print("Wrong input. Please try again.")
+                continue
+            break
+        return cont == "Y"
 
 
 if __name__ == "__main__":
