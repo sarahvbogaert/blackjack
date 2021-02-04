@@ -41,13 +41,13 @@ class Person:
         """
         play one time
         :param deck: deck of cards used for playing
-        :return: final_sums (list of possible sums of the cards received), burst (boolean)
+        :return: final_sums (list of possible sums of the cards received), bust (boolean)
         """
         final_sums = None
         print(f"Player {self.name} gets two cards.")
         self.add_cards([deck.deal_one(), deck.deal_one()])
         self.print_cards()
-        burst = False
+        bust = False
         while True:
             h_or_s = self.hit_or_stand(final_sums)
             if h_or_s == "H":
@@ -56,8 +56,8 @@ class Person:
                 self.print_cards()
                 final_sums = self.sum_cards()
                 if final_sums[0] > 21:
-                    print("BURST!")
-                    burst = True
+                    print("BUST!")
+                    bust = True
                     break
             else:
                 print("STAND!")
@@ -66,7 +66,7 @@ class Person:
             final_sums = self.sum_cards()
         deck.add_cards(self.all_cards)
         self.clear_cards()
-        return final_sums, burst
+        return final_sums, bust
 
     def hit_or_stand(self, final_sums):
         raise NotImplementedError("This function should not be called in abstract class.")
@@ -130,7 +130,7 @@ class Dealer(Person):
         """
         The dealer does not decide himself if he hits or stands. His behavior is deterministic and depends
         on the cards he has received until now.
-        if burst, stand. otherwise, if sum is 17 or higher and <= 21, stand, except if sum is a soft 17.
+        if bust, stand. otherwise, if sum is 17 or higher and <= 21, stand, except if sum is a soft 17.
         in other cases, hit.
         :param final_sums: possible sums of the cards he already owns
         :return: "H" or "S"
@@ -138,7 +138,7 @@ class Dealer(Person):
         if final_sums is None:
             final_sums = self.sum_cards()
         if final_sums[0] > 21:  # should not happen
-            print("BURST!")
+            print("BUST!")
             return "S"
         highest_smaller_21 = final_sums[0]
         index = 1
