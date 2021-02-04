@@ -5,6 +5,11 @@ from player import Player, Dealer
 class BlackJack:
 
     def __init__(self, name, balance, bet):
+        """
+        :param: name: name of player
+        :param: balance: initial balance of player
+        :param: bet: bet per play
+        """
         self.player = Player(name, balance)
         self.dealer = Dealer()
         self.deck = Deck()
